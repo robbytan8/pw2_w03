@@ -8,7 +8,7 @@ if ($submitPressed) {
     if ($stmt = mysqli_prepare($link, $query)) {
         //  s for string, i for int, d for double, b for blob
         mysqli_stmt_bind_param($stmt, "s", $name);
-        mysqli_stmt_execute($stmt);
+        mysqli_stmt_execute($stmt) or die(mysqli_error($link));
         mysqli_commit($link);
         mysqli_stmt_close($stmt);
     }
@@ -29,7 +29,7 @@ if ($submitPressed) {
 <?php
 $link = mysqli_connect("host", "username", "password", "dbname", "port") or die(mysqli_connect_error());
 $query = "SELECT * FROM category";
-if ($result = mysqli_query($link, $query)) {
+if ($result = mysqli_query($link, $query) or die(mysqli_error($link))) {
     echo '<table id="tableId" class="display">';
     echo '<thead>';
     echo '<tr>';
